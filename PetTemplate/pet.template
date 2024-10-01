@@ -1,0 +1,4 @@
+template <typename ThingHeight>
+void Pet<ThingHeight>::displayInfo(){
+    cout << "Height: " << height << endl;
+}

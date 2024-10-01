@@ -1,0 +1,10 @@
+CC=g++
+
+TARGET = demo
+
+all: $(TARGET)
+
+$(TARGET): throttle.cpp demo.cpp
+	$(CC) -o $(TARGET) throttle.cpp demo.cpp -L/usr/local/lib -lgtest -lpthread
+
+clean: rm $(TARGET)
