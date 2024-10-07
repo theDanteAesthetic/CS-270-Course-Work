@@ -4,14 +4,14 @@
 // Constructor implementation
 Challenge2::Challenge2(const multiset<int>& nums) {
     // Initializes the multiset with given numbers
-    add_your_code_here
+    numbers = nums;
 }
 
 // Method to find a number
 void Challenge2::findNumber(int num) {
     cout << "Challenge 2" << endl;
 
-    multiset<int>::iterator it = add_your_code_here;
+    multiset<int>::iterator it = numbers.begin();
     if (it != numbers.end()) {
         cout << "Number " << num << " found in the multiset." << endl;
     } else {
