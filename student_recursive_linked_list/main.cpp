@@ -13,6 +13,6 @@ int main() {
    
     // Test in the console the functions count and search for the number 3 and 5 
     cout << first_forward_list.count_nodes() << endl;
-    cout << first_forward_list.search(6) << endl;
+    cout << first_forward_list.search(2) << endl;
     return 0;
 }

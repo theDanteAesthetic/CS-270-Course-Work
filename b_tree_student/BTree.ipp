@@ -15,12 +15,27 @@ BTree<TBD>::~BTree() {
 
 template <typename TBD>
 void BTree<TBD>::insert(const TBD& key) {
-    
+    if (root == NULL){
+        root = new BTreeNode<TBD>(t);
+        root -> getKeys()[0] = key;
+        root -> setNumKeys(1);
+        return;
+    }
+    insert_non_full(root, key);
+
 }
 
 template <typename TBD>
 void BTree<TBD>::insert_non_full(BTreeNode<TBD>* x, const TBD& k) {
-   
+   int i = x -> getNumKeys() - 1;
+   if(x -> isLeaf()){
+    while(i >= 0 && k < x->getKeys()[i]){
+        x-> getKeys()[i+1] = x->getKeys()[i];
+        i--;
+    }
+    x -> getKeys()[i+1] = k;
+    x -> setNumKeys(x->getNumKeys() + 1);
+   }
 }
 
 template <typename TBD>

@@ -38,16 +38,16 @@ void BinarySearchTree<T>::insert(const T& value){
 }
 
 // TO DO
-template <typename T>
-BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::insertRecursive(BinaryNode* node, const T& value){
-    if(node == NULL){
+template <typename T> //Allows the following function to use any data type as an input
+typename BinarySearchTree<T>::BinaryNode* BinarySearchTree<T>::insertRecursive(BinaryNode* node, const T& value){ //takes in two parameters: 1. A Binary Node that acts as the root and 2. a value to insert.
+    if(node == NULL){ //if there is no node return a new node with the inputed value
         return new BinaryNode(value);
     }
-    if(value > node -> getRoot()){
-        return insertRecursive(right, value);
+    if(value > node -> value){ //if the inputed value is greater than the value of the current node return the function with the node being the right child of the current node and the value staying the same
+        return insertRecursive(node -> right, value);
     }
-    else(value < node -> getRoot()){
-        return insertRecursive(left, value);
+    else{ //otherwise return the function with the node being the left child of the current node and the inputed value staying the same.
+        return insertRecursive(node -> left, value);
     }
 }
 
@@ -61,15 +61,16 @@ std::vector<T> BinarySearchTree<T>::preOrderTraversal() const {
 }
 
 // TO DO
-template <typename T>
-void BinarySearchTree<T>::preOrderTraversal(BinaryNode* node, std::vector<T>& nodes) const {
-    std::vector<T> n;
-    if(node != NULL){
-        n.push_back(node -> getRoot());
-        preOrderTraversal(node -> left);
-        preOrderTaversal(node -> right);
+template <typename T> //Allows the following function to use any data type as an input
+void BinarySearchTree<T>::preOrderTraversal(BinaryNode* node, std::vector<T>& nodes) const { //Takes in a node and a vector of nodes as parameter
+    std::vector<T> temp; //Creates a temporary vector to to reorder the nodes in the current vector
+    if(node != NULL){ //runs only when there are nodes
+        //preOrderTraversal starts with the root and then goes to the left subtree and then to the right
+        n.push_back(node -> value); //treats the current node as the root and pushes it into the end of the vector
+        preOrderTraversal(node -> left, nodes); //runs the function with the left child of the current node
+        preOrderTraversal(node -> right, nodes); //after it runs through the left subtree it goes to the right and runs again
     }
-    nodes = n;
+    nodes = temp; //sets the value of the inputed vector to the temporary vector we created earlier
 }
 
 template <typename T>
@@ -80,15 +81,16 @@ std::vector<T> BinarySearchTree<T>::inOrderTraversal() const {
 }
 
 // TO DO
-template <typename T>
-void BinarySearchTree<T>::inOrderTraversal(BinaryNode* node, std::vector<T>& nodes) const{
-    std::vector<T> n;
-    if(node != NULL){
-        inOrderTraversal(node -> left);
-        n.push_back(node -> getRoot());
-        inOrderTaversal(node -> right);
+template <typename T> //Allows the following function to use any data type as an input
+void BinarySearchTree<T>::inOrderTraversal(BinaryNode* node, std::vector<T>& nodes) const{ //Takes in a node and a vector of nodes as parameter
+    std::vector<T> temp; //Creates a temporary vector to to reorder the nodes in the current vector
+    if(node != NULL){ //runs only when there are nodes
+        //inOrderTraversal starts with the left subtree and works its way up through the root and then down the right subtree
+        inOrderTraversal(node -> left, nodes); //runs the function with the left child of the current node
+        n.push_back(node -> value); //treats the current node as the root and pushes it into the end of the vector
+        inOrderTraversal(node -> right, nodes); //after it runs through the left subtree and back through the root it goes to the right and runs again
     }
-    nodes = n;
+    nodes = temp; //sets the value of the inputed vector to the temporary vector we created earlier
 }
 
 template <typename T>
@@ -99,18 +101,15 @@ std::vector<T> BinarySearchTree<T>::postOrderTraversal() const {
 }
 
 // TO DO
-template <typename T>
-void BinarySearchTree<T>::postOrderTraversal(BinaryNode* node, std::vector<T>& nodes) const {
-    std::vector<T> n;
-    if(node != NULL){
-        postOrderTraversal(node -> left);
-        postOrderTaversal(node -> right);
-        n.push_back(node -> getRoot());
+template <typename T> //Allows the following function to use any data type as an input
+void BinarySearchTree<T>::postOrderTraversal(BinaryNode* node, std::vector<T>& nodes) const { //Takes in a node and a vector of nodes as parameter
+    std::vector<T> temp; //Creates a temporary vector to to reorder the nodes in the current vector
+    if(node != NULL){ //runs only when there are nodes
+        //postOrderTraversal begins with the left subtree then the right subtree and ends with the root
+        postOrderTraversal(node -> left, nodes); //runs the function with the left child of the current node
+        postOrderTraversal(node -> right, nodes); //after it runs through the left subtree it goes to the right and runs again
+        n.push_back(node -> value); //treats the current node as the root and pushes it into the end of the vector
     }
-    nodes = n;
+    nodes = temp; //sets the value of the inputed vector to the temporary vector we created earlier
 }
 }
-
-
-
-
